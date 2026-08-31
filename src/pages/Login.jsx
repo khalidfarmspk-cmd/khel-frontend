@@ -36,10 +36,14 @@ export default function Login() {
     <div className={styles.page}>
       <form className={styles.card} onSubmit={handleSubmit}>
         <div className={styles.brandRow}>
-          <div className={styles.logo}>PS</div>
+          <img
+            className={styles.logo}
+            src="/khalid-farms-logo.jpg"
+            alt="Khalid farms"
+          />
           <div>
-            <div className={styles.brandName}>Point of Sale</div>
-            <div className={styles.brandPlace}>Lahore</div>
+            <div className={styles.brandName}>Khalid farms</div>
+            <div className={styles.brandPlace}>Bahria town Lahore</div>
           </div>
         </div>
 

@@ -15,10 +15,14 @@ export default function Layout() {
     <div className={styles.layout}>
       <aside className={styles.sidebar}>
         <div className={styles.brand}>
-          <div className={styles.logo}>PS</div>
+          <img
+            className={styles.logo}
+            src="/khalid-farms-logo.jpg"
+            alt="Khalid farms"
+          />
           <div>
-            <div className={styles.brandName}>Point of Sale</div>
-            <div className={styles.brandPlace}>Lahore</div>
+            <div className={styles.brandName}>Khalid farms</div>
+            <div className={styles.brandPlace}>Bahria town Lahore</div>
           </div>
         </div>
 
