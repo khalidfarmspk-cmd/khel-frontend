@@ -1,0 +1,50 @@
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tab,
+.tabActive {
+  border: 1px solid var(--border);
+  background: var(--white);
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tab:hover {
+  background: #fafafa;
+}
+
+.tabActive {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--white);
+}
+
+.tableCard {
+  margin-bottom: 16px;
+}
+
+.expenseCard {
+  margin-bottom: 16px;
+}
+
+.expenseForm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 0 16px 16px;
+}
+
+.expenseField {
+  min-width: 160px;
+  flex: 1;
+}
+
+.expenseError {
+  margin: 0 16px 16px;
+}

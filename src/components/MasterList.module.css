@@ -1,0 +1,25 @@
+.addForm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.field {
+  min-width: 180px;
+  flex: 1;
+}
+
+.checkField {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  padding-bottom: 10px;
+}
+
+.rowActions {
+  display: flex;
+  gap: 8px;
+}

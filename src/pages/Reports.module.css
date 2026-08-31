@@ -1,0 +1,63 @@
+.chartCard {
+  margin-bottom: 16px;
+}
+
+.tableCard {
+  margin-bottom: 16px;
+}
+
+.tableHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-right: 16px;
+}
+
+.pad {
+  margin: 12px 16px 16px;
+}
+
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 180px;
+  overflow-x: auto;
+  padding: 16px 16px 12px;
+}
+
+.barCol {
+  flex: 1 0 20px;
+  max-width: 48px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.bar {
+  width: 100%;
+  background: var(--red);
+  min-height: 0;
+}
+
+.barLabel {
+  margin-top: 6px;
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover td {
+  background: #fafafa;
+}
+
+.selected td {
+  background: #fff1f0;
+}
