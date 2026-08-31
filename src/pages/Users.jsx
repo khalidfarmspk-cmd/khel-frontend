@@ -4,6 +4,7 @@ import { useAuth } from '../auth'
 import { asArray, formatRole, formatStatus, matchesQuery } from '../format'
 import AddUserModal from '../components/AddUserModal'
 import EditUserModal from '../components/EditUserModal'
+import SkeletonTable from '../components/SkeletonTable'
 import page from '../page.module.css'
 
 export default function Users() {
@@ -85,7 +86,9 @@ export default function Users() {
       </div>
 
       {error ? <div className={`banner-error ${page.banner}`}>{error}</div> : null}
-      {loading ? <p className="banner-info">Loading users…</p> : null}
+      {loading ? (
+        <SkeletonTable columns={4} rows={5} hasActions />
+      ) : null}
 
       {!loading && !error ? (
         <div className={page.card}>

@@ -4,6 +4,7 @@ import { useAuth } from '../auth'
 import { formatPrice, matchesQuery } from '../format'
 import EditPriceModal from '../components/EditPriceModal'
 import AddProductModal from '../components/AddProductModal'
+import SkeletonTable from '../components/SkeletonTable'
 import styles from './Products.module.css'
 
 export default function Products() {
@@ -87,7 +88,9 @@ export default function Products() {
       </div>
 
       {error ? <div className={`banner-error ${styles.banner}`}>{error}</div> : null}
-      {loading ? <p className="banner-info">Loading products…</p> : null}
+      {loading ? (
+        <SkeletonTable columns={8} rows={8} hasActions={isOwner} />
+      ) : null}
 
       {!loading && !error ? (
         <div className={styles.card}>

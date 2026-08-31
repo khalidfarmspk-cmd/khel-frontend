@@ -4,6 +4,7 @@ import { apiRequest } from '../api'
 import { useAuth } from '../auth'
 import { asArray } from '../format'
 import styles from './AddProductModal.module.css'
+import SkeletonForm from './SkeletonForm'
 
 function categoryIdOf(row) {
   return row.categoryId ?? row.kategori_Id
@@ -185,9 +186,12 @@ export default function AddProductModal({ onClose, onSaved }) {
 
         {loadError ? <div className="banner-error">{loadError}</div> : null}
         {error ? <div className="banner-error">{error}</div> : null}
-        {loading ? <p className="banner-info">Loading form…</p> : null}
         {saving ? <p className="banner-info">Saving…</p> : null}
 
+        {loading ? (
+          <SkeletonForm fields={6} />
+        ) : (
+          <>
         <label className={styles.field}>
           <span className="label">Product name</span>
           <input
@@ -302,6 +306,8 @@ export default function AddProductModal({ onClose, onSaved }) {
             ))}
           </select>
         </label>
+          </>
+        )}
 
         <div className={styles.actions}>
           <button

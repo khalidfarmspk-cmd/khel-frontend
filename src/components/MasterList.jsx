@@ -4,6 +4,7 @@ import { useAuth } from '../auth'
 import { asArray, matchesQuery } from '../format'
 import page from '../page.module.css'
 import styles from './MasterList.module.css'
+import SkeletonTable from './SkeletonTable'
 
 function emptyValues(fields) {
   const values = {}
@@ -211,7 +212,13 @@ export default function MasterList({
 
       {formError ? <div className={`banner-error ${page.banner}`}>{formError}</div> : null}
       {error ? <div className={`banner-error ${page.banner}`}>{error}</div> : null}
-      {loading ? <p className="banner-info">Loading {title.toLowerCase()}…</p> : null}
+      {loading ? (
+        <SkeletonTable
+          columns={columns.length}
+          rows={6}
+          hasActions={isOwner}
+        />
+      ) : null}
 
       {!loading && !error ? (
         <div className={page.card}>

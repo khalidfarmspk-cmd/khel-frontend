@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { apiRequest } from '../api'
 import { useAuth } from '../auth'
 import KpiBar from '../components/KpiBar'
+import SkeletonKpiBar from '../components/SkeletonKpiBar'
+import SkeletonTable from '../components/SkeletonTable'
 import { asArray, formatPrice, formatWhen, todayIso } from '../format'
 import page from '../page.module.css'
 import styles from './Dashboard.module.css'
@@ -116,7 +118,7 @@ export default function Dashboard() {
       {summaryError ? (
         <div className={`banner-error ${page.banner}`}>{summaryError}</div>
       ) : null}
-      {summaryLoading ? <p className="banner-info">Loading summary…</p> : null}
+      {summaryLoading ? <SkeletonKpiBar /> : null}
       {!summaryLoading && summary ? (
         <KpiBar
           items={[
@@ -135,7 +137,7 @@ export default function Dashboard() {
             <div className={`banner-error ${styles.sectionBanner}`}>{salesError}</div>
           ) : null}
           {salesLoading ? (
-            <p className={`banner-info ${styles.sectionBanner}`}>Loading sales…</p>
+            <SkeletonTable columns={4} rows={5} inCard={false} />
           ) : null}
           {!salesLoading && !salesError ? (
             <table className={page.table}>
@@ -177,9 +179,7 @@ export default function Dashboard() {
             </div>
           ) : null}
           {productsLoading ? (
-            <p className={`banner-info ${styles.sectionBanner}`}>
-              Loading products…
-            </p>
+            <SkeletonTable columns={3} rows={5} inCard={false} />
           ) : null}
           {!productsLoading && !productsError ? (
             <table className={page.table}>

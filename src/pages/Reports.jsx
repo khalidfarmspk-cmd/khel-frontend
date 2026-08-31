@@ -2,6 +2,9 @@ import { useEffect, useMemo, useState } from 'react'
 import { apiRequest } from '../api'
 import { useAuth } from '../auth'
 import KpiBar from '../components/KpiBar'
+import SkeletonChart from '../components/SkeletonChart'
+import SkeletonKpiBar from '../components/SkeletonKpiBar'
+import SkeletonTable from '../components/SkeletonTable'
 import {
   asArray,
   formatPrice,
@@ -173,7 +176,7 @@ export default function Reports() {
       {reportError ? (
         <div className={`banner-error ${page.banner}`}>{reportError}</div>
       ) : null}
-      {reportLoading ? <p className="banner-info">Loading report…</p> : null}
+      {reportLoading ? <SkeletonKpiBar /> : null}
       {!reportLoading && report ? (
         <KpiBar
           items={[
@@ -183,6 +186,13 @@ export default function Reports() {
             { label: 'Average basket', value: formatPrice(report.avgBasket) },
           ]}
         />
+      ) : null}
+
+      {reportLoading ? (
+        <section className={`${page.card} ${styles.chartCard}`}>
+          <div className={page.cardHead}>Revenue by day</div>
+          <SkeletonChart />
+        </section>
       ) : null}
 
       {!reportLoading && report ? (
@@ -227,7 +237,7 @@ export default function Reports() {
           <div className={`banner-error ${styles.pad}`}>{salesError}</div>
         ) : null}
         {salesLoading ? (
-          <p className={`banner-info ${styles.pad}`}>Loading transactions…</p>
+          <SkeletonTable columns={4} rows={6} inCard={false} className={styles.pad} />
         ) : null}
         {!salesLoading && !salesError ? (
           <table className={page.table}>
@@ -276,7 +286,7 @@ export default function Reports() {
             <div className={`banner-error ${styles.pad}`}>{linesError}</div>
           ) : null}
           {linesLoading ? (
-            <p className={`banner-info ${styles.pad}`}>Loading line items…</p>
+            <SkeletonTable columns={4} rows={4} inCard={false} className={styles.pad} />
           ) : null}
           {!linesLoading && !linesError ? (
             <table className={page.table}>

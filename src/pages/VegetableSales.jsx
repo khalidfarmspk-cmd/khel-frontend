@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from 'react'
 import { apiRequest } from '../api'
 import { useAuth } from '../auth'
 import KpiBar from '../components/KpiBar'
+import SkeletonKpiBar from '../components/SkeletonKpiBar'
+import SkeletonTable from '../components/SkeletonTable'
 import {
   asArray,
   formatPrice,
@@ -136,7 +138,15 @@ export default function VegetableSales() {
       </div>
 
       {error ? <div className={`banner-error ${page.banner}`}>{error}</div> : null}
-      {loading ? <p className="banner-info">Loading vegetable sales…</p> : null}
+      {loading ? (
+        <>
+          <SkeletonKpiBar count={3} />
+          <section className={`${page.card} ${styles.tableCard}`}>
+            <div className={page.cardHead}>Sales</div>
+            <SkeletonTable columns={4} rows={6} inCard={false} />
+          </section>
+        </>
+      ) : null}
 
       {!loading && !error && report ? (
         <>
