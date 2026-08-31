@@ -139,7 +139,15 @@
 
 @media (max-width: 900px) {
   .kpiBar {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .kpiCell {
+    padding: 16px;
+  }
+
+  .kpiValue {
+    height: 22px;
   }
 
   .kpiCell:nth-child(2n) {
@@ -148,5 +156,45 @@
 
   .kpiCell:nth-child(-n + 2) {
     border-bottom: 1px solid var(--border);
+  }
+
+  .formRow {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 12px 16px;
+  }
+
+  .formField {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .formButton {
+    width: 100%;
+  }
+
+  .chart {
+    height: 140px;
+    padding: 12px;
+  }
+
+  .table th,
+  .table td {
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 520px) {
+  .kpiBar {
+    grid-template-columns: 1fr !important;
+  }
+
+  .kpiCell {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .kpiCell:last-child {
+    border-bottom: none;
   }
 }

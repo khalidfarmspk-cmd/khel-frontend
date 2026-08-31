@@ -63,3 +63,18 @@
 .field {
   display: block;
 }
+
+@media (max-width: 520px) {
+  .page {
+    padding: 16px;
+    align-items: flex-start;
+  }
+
+  .card {
+    padding: 24px 18px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+}

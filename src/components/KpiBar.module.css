@@ -29,11 +29,20 @@
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.1;
+  word-break: break-word;
 }
 
 @media (max-width: 900px) {
   .bar {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .cell {
+    padding: 16px;
+  }
+
+  .value {
+    font-size: 22px;
   }
 
   .cell:nth-child(2n) {
@@ -42,5 +51,24 @@
 
   .cell:nth-child(-n + 2) {
     border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  }
+}
+
+@media (max-width: 520px) {
+  .bar {
+    grid-template-columns: 1fr;
+  }
+
+  .cell {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .cell:last-child {
+    border-bottom: none;
+  }
+
+  .value {
+    font-size: 20px;
   }
 }

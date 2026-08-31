@@ -117,3 +117,14 @@ button:disabled {
   color: var(--muted);
   font-size: 14px;
 }
+
+@media (max-width: 520px) {
+  .btn-primary,
+  .btn-secondary {
+    padding: 12px 16px;
+  }
+
+  .input {
+    font-size: 16px;
+  }
+}

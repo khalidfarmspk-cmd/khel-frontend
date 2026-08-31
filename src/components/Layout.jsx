@@ -1,4 +1,5 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from '../auth'
 import { formatDate, formatRole } from '../format'
 import styles from './Layout.module.css'
@@ -10,9 +11,35 @@ function itemClass({ isActive }) {
 export default function Layout() {
   const { username, levelUser, isOwner, logout } = useAuth()
   const today = formatDate(new Date())
+  const location = useLocation()
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [location.pathname])
+
+  useEffect(() => {
+    if (!menuOpen) return undefined
+    function onKey(event) {
+      if (event.key === 'Escape') setMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [menuOpen])
 
   return (
-    <div className={styles.layout}>
+    <div className={`${styles.layout} ${menuOpen ? styles.menuOpen : ''}`}>
+      <button
+        type="button"
+        className={styles.backdrop}
+        aria-label="Close menu"
+        onClick={() => setMenuOpen(false)}
+      />
+
       <aside className={styles.sidebar}>
         <div className={styles.brand}>
           <img
@@ -24,6 +51,14 @@ export default function Layout() {
             <div className={styles.brandName}>Khalid farms</div>
             <div className={styles.brandPlace}>Bahria town Lahore</div>
           </div>
+          <button
+            type="button"
+            className={styles.sidebarClose}
+            aria-label="Close menu"
+            onClick={() => setMenuOpen(false)}
+          >
+            ×
+          </button>
         </div>
 
         <nav className={styles.nav}>
@@ -84,6 +119,18 @@ export default function Layout() {
 
       <div className={styles.main}>
         <header className={styles.header}>
+          <button
+            type="button"
+            className={styles.menuButton}
+            aria-label="Open menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(true)}
+          >
+            <span className={styles.menuBar} />
+            <span className={styles.menuBar} />
+            <span className={styles.menuBar} />
+          </button>
+
           <div className={styles.headerItem}>
             <span className={styles.headerLabel}>Date</span>
             <span>{today}</span>
@@ -91,7 +138,7 @@ export default function Layout() {
           <div className={styles.headerDivider} />
           <div className={styles.headerItem}>
             <span className={styles.headerLabel}>Signed in</span>
-            <span>
+            <span className={styles.headerUser}>
               {username}
               {levelUser ? ` | ${formatRole(levelUser)}` : ''}
             </span>

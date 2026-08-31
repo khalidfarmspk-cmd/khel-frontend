@@ -13,3 +13,9 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 520px) {
+  .sectionBanner {
+    margin: 10px 12px 12px;
+  }
+}

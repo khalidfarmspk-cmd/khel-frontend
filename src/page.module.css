@@ -97,3 +97,39 @@
   align-items: center;
   gap: 12px;
 }
+
+@media (max-width: 900px) {
+  .title {
+    font-size: 26px;
+  }
+
+  .top {
+    align-items: stretch;
+  }
+
+  .topActions,
+  .filters {
+    width: 100%;
+  }
+
+  .search,
+  .dateInput {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .table th,
+  .table td {
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 520px) {
+  .title {
+    font-size: 22px;
+  }
+
+  .filters > label {
+    width: 100%;
+  }
+}

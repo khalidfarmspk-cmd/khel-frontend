@@ -48,3 +48,24 @@
 .expenseError {
   margin: 0 16px 16px;
 }
+
+@media (max-width: 900px) {
+  .tabs {
+    width: 100%;
+  }
+
+  .tab,
+  .tabActive {
+    flex: 1 1 calc(50% - 8px);
+    text-align: center;
+  }
+
+  .expenseForm {
+    padding: 0 12px 16px;
+  }
+
+  .expenseField {
+    min-width: 100%;
+    flex: 1 1 100%;
+  }
+}

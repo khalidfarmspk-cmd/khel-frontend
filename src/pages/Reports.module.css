@@ -61,3 +61,21 @@
 .selected td {
   background: #fff1f0;
 }
+
+@media (max-width: 900px) {
+  .tableHead {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 12px 0 0;
+    gap: 10px;
+  }
+
+  .chart {
+    height: 140px;
+    padding: 12px;
+  }
+
+  .barCol {
+    flex: 0 0 24px;
+  }
+}

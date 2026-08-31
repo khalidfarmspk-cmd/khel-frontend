@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   padding: 22px 0 16px;
+  z-index: 40;
 }
 
 .brand {
@@ -131,6 +132,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
 }
 
 .headerLabel {
@@ -141,10 +143,17 @@
   color: var(--muted);
 }
 
+.headerUser {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .headerDivider {
   width: 1px;
   height: 16px;
   background: var(--border);
+  flex-shrink: 0;
 }
 
 .headerLogout {
@@ -155,9 +164,126 @@
   font-size: 13px;
   font-weight: 600;
   color: var(--red);
+  flex-shrink: 0;
 }
 
 .content {
   padding: 28px 32px 40px;
   flex: 1;
+  min-width: 0;
+}
+
+.menuButton,
+.sidebarClose,
+.backdrop {
+  display: none;
+}
+
+.menuButton {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  padding: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.menuBar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--text);
+}
+
+.sidebarClose {
+  margin-left: auto;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: rgba(17, 17, 17, 0.45);
+  z-index: 30;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(280px, 86vw);
+    transform: translateX(-105%);
+    transition: transform 0.2s ease;
+    box-shadow: none;
+  }
+
+  .menuOpen .sidebar {
+    transform: translateX(0);
+    box-shadow: 8px 0 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .menuButton {
+    display: inline-flex;
+  }
+
+  .sidebarClose {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menuOpen .backdrop {
+    display: block;
+  }
+
+  .header {
+    padding: 8px 12px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .headerDivider {
+    display: none;
+  }
+
+  .headerItem {
+    font-size: 12px;
+  }
+
+  .headerLabel {
+    display: none;
+  }
+
+  .content {
+    padding: 16px 14px 28px;
+  }
+}
+
+@media (max-width: 520px) {
+  .headerItem:first-of-type {
+    display: none;
+  }
+
+  .headerUser {
+    max-width: 140px;
+  }
 }

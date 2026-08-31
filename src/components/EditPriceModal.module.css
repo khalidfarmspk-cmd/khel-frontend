@@ -43,3 +43,25 @@
   gap: 8px;
   margin-top: 8px;
 }
+
+@media (max-width: 520px) {
+  .overlay {
+    padding: 12px;
+    align-items: flex-end;
+  }
+
+  .modal {
+    max-width: none;
+    max-height: 92vh;
+    overflow-y: auto;
+    padding: 20px;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+}
