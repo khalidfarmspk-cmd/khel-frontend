@@ -4,12 +4,12 @@ import { apiRequest } from '../api'
 import { useAuth } from '../auth'
 import styles from './EditPriceModal.module.css'
 
-function parsePositiveInt(value) {
+function parseNonNegativeInt(value) {
   const trimmed = String(value).trim()
   if (trimmed === '') return null
   if (!/^[0-9]+$/.test(trimmed)) return false
   const n = Number(trimmed)
-  if (!Number.isInteger(n) || n <= 0) return false
+  if (!Number.isInteger(n) || n < 0) return false
   return n
 }
 
@@ -32,20 +32,16 @@ export default function EditPriceModal({ product, onClose, onSaved }) {
     event.preventDefault()
     setError('')
 
-    const buy = parsePositiveInt(buyPrice)
-    const sell = parsePositiveInt(sellPrice)
+    const buy = parseNonNegativeInt(buyPrice)
+    const sell = parseNonNegativeInt(sellPrice)
 
     if (buy === false || sell === false) {
-      setError('Prices must be positive integers')
+      setError('Prices must be whole numbers 0 or greater')
       return
     }
 
-    const body = {}
-    if (buy !== null) body.buyPrice = buy
-    if (sell !== null) body.sellPrice = sell
-
-    if (Object.keys(body).length === 0) {
-      setError('Enter a buy price and/or sell price')
+    if (buy === null || sell === null) {
+      setError('Buy price and sell price are required (0 is allowed)')
       return
     }
 
@@ -54,7 +50,10 @@ export default function EditPriceModal({ product, onClose, onSaved }) {
       await apiRequest(`/api/products/${encodeURIComponent(product.productCode)}`, {
         method: 'PUT',
         token,
-        body,
+        body: {
+          buyPrice: buy,
+          sellPrice: sell,
+        },
       })
       onSaved()
     } catch (err) {

@@ -54,8 +54,13 @@ export default function Products() {
         product.supplier,
         product.buyPrice,
         product.sellPrice,
+        String(product.buyPrice ?? ''),
+        String(product.sellPrice ?? ''),
         formatPrice(product.buyPrice),
         formatPrice(product.sellPrice),
+        // unformatted price digits so "1500" matches "Rs. 1,500"
+        String(product.buyPrice ?? '').replace(/\D/g, ''),
+        String(product.sellPrice ?? '').replace(/\D/g, ''),
         product.stock,
       ]),
     )
@@ -71,7 +76,7 @@ export default function Products() {
           <input
             className={`input ${styles.search}`}
             type="search"
-            placeholder="Search all fields"
+            placeholder="Search name, code, price…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />

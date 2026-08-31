@@ -126,12 +126,12 @@ export default function AddProductModal({ onClose, onSaved }) {
       setError('Barcode must be a positive number')
       return
     }
-    if (!Number.isInteger(harga_beli) || harga_beli <= 0) {
-      setError('Buy price must be a positive number')
+    if (!Number.isInteger(harga_beli) || harga_beli < 0) {
+      setError('Buy price must be 0 or greater')
       return
     }
-    if (!Number.isInteger(harga_jual) || harga_jual <= 0) {
-      setError('Sell price must be a positive number')
+    if (!Number.isInteger(harga_jual) || harga_jual < 0) {
+      setError('Sell price must be 0 or greater')
       return
     }
     if (!Number.isInteger(kategori_Id) || kategori_Id <= 0) {
@@ -234,7 +234,7 @@ export default function AddProductModal({ onClose, onSaved }) {
             className="input"
             name="harga_beli"
             type="number"
-            min="1"
+            min="0"
             step="1"
             value={buyPrice}
             onChange={(e) => setBuyPrice(e.target.value)}
@@ -248,7 +248,7 @@ export default function AddProductModal({ onClose, onSaved }) {
             className="input"
             name="harga_jual"
             type="number"
-            min="1"
+            min="0"
             step="1"
             value={sellPrice}
             onChange={(e) => setSellPrice(e.target.value)}
