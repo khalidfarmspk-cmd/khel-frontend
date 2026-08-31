@@ -49,17 +49,21 @@ export function AuthProvider({ children }) {
       async login(nextUsername, password) {
         const data = await apiRequest('/api/auth/login', {
           method: 'POST',
-          body: { username: nextUsername, password },
+          body: { username: nextUsername, password, forAdmin: true, client: 'admin' },
           handle401: false,
         })
         if (!data?.token) {
           throw new Error('Login failed')
         }
+        const role = getLevelUser(data.token)
+        if (role !== 'PEMILIK') {
+          throw new Error('Admin access only — owners can sign in here')
+        }
         sessionStorage.setItem('token', data.token)
         sessionStorage.setItem('username', nextUsername)
         setToken(data.token)
         setUsername(nextUsername)
-        setLevelUser(getLevelUser(data.token))
+        setLevelUser(role)
       },
       logout() {
         clearAuth()

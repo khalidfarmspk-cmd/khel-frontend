@@ -54,6 +54,12 @@
   letter-spacing: -0.03em;
 }
 
+.hint {
+  margin: -8px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
 .field {
   display: block;
 }

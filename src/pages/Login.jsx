@@ -5,13 +5,13 @@ import PasswordInput from '../components/PasswordInput'
 import styles from './Login.module.css'
 
 export default function Login() {
-  const { token, login } = useAuth()
+  const { token, isOwner, login } = useAuth()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  if (token) {
+  if (token && isOwner) {
     return <Navigate to="/" replace />
   }
 
@@ -25,7 +25,9 @@ export default function Login() {
       setError(
         err.status === 401
           ? 'Invalid username or password'
-          : err.message || 'Login failed',
+          : err.status === 403
+            ? err.message || 'Admin access only — owners can sign in here'
+            : err.message || 'Login failed',
       )
     } finally {
       setLoading(false)
@@ -47,7 +49,8 @@ export default function Login() {
           </div>
         </div>
 
-        <h1 className={styles.title}>Sign in</h1>
+        <h1 className={styles.title}>Admin sign in</h1>
+        <p className={styles.hint}>Owners only — staff use the till app.</p>
 
         {error ? <div className="banner-error">{error}</div> : null}
         {loading ? <p className="banner-info">Signing in…</p> : null}
