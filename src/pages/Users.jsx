@@ -16,6 +16,7 @@ export default function Users() {
   const [adding, setAdding] = useState(false)
   const [editing, setEditing] = useState(null)
   const [reloadKey, setReloadKey] = useState(0)
+  const [deletingId, setDeletingId] = useState(null)
 
   useEffect(() => {
     let cancelled = false
@@ -60,6 +61,24 @@ export default function Users() {
 
   function refresh() {
     setReloadKey((key) => key + 1)
+  }
+
+  async function handleDelete(user) {
+    const ok = window.confirm(
+      `Delete ${user.username}? This also removes the account from the shop till.`,
+    )
+    if (!ok) return
+
+    setDeletingId(user.userId)
+    setError('')
+    try {
+      await apiRequest(`/api/users/${user.userId}`, { method: 'DELETE', token })
+      refresh()
+    } catch (err) {
+      setError(err.message || 'Could not delete user')
+    } finally {
+      setDeletingId(null)
+    }
   }
 
   return (
@@ -125,6 +144,14 @@ export default function Users() {
                         onClick={() => setEditing(user)}
                       >
                         Edit
+                      </button>
+                      <button
+                        className="btn-secondary btn-small"
+                        type="button"
+                        disabled={deletingId === user.userId}
+                        onClick={() => handleDelete(user)}
+                      >
+                        {deletingId === user.userId ? 'Deleting…' : 'Delete'}
                       </button>
                     </td>
                   </tr>
